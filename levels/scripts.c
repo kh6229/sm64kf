@@ -218,6 +218,7 @@ const LevelScript script_func_global_3[] = {
 };
 
 const LevelScript script_func_global_4[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_BLUE_MUSHROOM, blue_mushroom_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BROWN_MUSHROOM, brown_mushroom_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WATER_BOMB,              water_bomb_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WATER_BOMB_SHADOW,       water_bomb_shadow_geo),

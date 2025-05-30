@@ -4,6 +4,7 @@
 #define MODEL_NONE                             0x00
 
 /* fast64 object exports get inserted here */
+#define MODEL_BLUE_MUSHROOM               89
 #define MODEL_BROWN_MUSHROOM              87
 
 /* Global models that are loaded for every level */

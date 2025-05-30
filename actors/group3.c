@@ -15,3 +15,5 @@ UNUSED static const u64 binid_0 = 0;
 UNUSED static const u64 binid_1 = 1;
 
 #include "brown_mushroom/model.inc.c"
+#include "blue_mushroom/collision.inc.c"
+#include "blue_mushroom/model.inc.c"

@@ -11,3 +11,4 @@
 #include "water_bubble/geo.inc.c"
 
 #include "brown_mushroom/geo.inc.c"
+#include "blue_mushroom/geo.inc.c"

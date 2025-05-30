@@ -40,4 +40,8 @@ extern const Gfx water_bubble_seg5_dl_05011000[];
 
 #include "brown_mushroom/geo_header.h"
 
+#include "blue_mushroom/collision_header.h"
+
+#include "blue_mushroom/geo_header.h"
+
 #endif
