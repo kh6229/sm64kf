@@ -9,3 +9,5 @@
 
 #include "king_bobomb/geo.inc.c"
 #include "water_bubble/geo.inc.c"
+
+#include "brown_mushroom/geo.inc.c"
