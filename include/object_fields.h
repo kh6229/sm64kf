@@ -1255,6 +1255,12 @@
 #define /*0x0FC*/ oYoshiChosenHome OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oYoshiTargetYaw  OBJECT_FIELD_S32(0x1E)
 
+/* Blue Mushcoom */
+#define oBlueMushBaseScale OBJECT_FIELD_S32(0x1C)
+
+/* Blue Coin Switch */
+#define oBlueCoinSwitchTimer OBJECT_FIELD_S32(0x1B)
+
 
 /*Custom general defines:
 

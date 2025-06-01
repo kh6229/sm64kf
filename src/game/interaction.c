@@ -56,6 +56,7 @@ u32 interact_hoot          (struct MarioState *m, u32 interactType, struct Objec
 u32 interact_cap           (struct MarioState *m, u32 interactType, struct Object *obj);
 u32 interact_grabbable     (struct MarioState *m, u32 interactType, struct Object *obj);
 u32 interact_text          (struct MarioState *m, u32 interactType, struct Object *obj);
+u32 interact_bounce_top2   (struct MarioState *m, u32 interactType, struct Object *obj);
 
 struct InteractionHandler {
     u32 interactType;
@@ -80,7 +81,7 @@ static struct InteractionHandler sInteractionHandlers[] = {
     { INTERACT_CLAM_OR_BUBBA,  interact_clam_or_bubba },
     { INTERACT_BULLY,          interact_bully },
     { INTERACT_SHOCK,          interact_shock },
-    { INTERACT_BOUNCE_TOP2,    interact_bounce_top },
+    { INTERACT_BOUNCE_TOP2,    interact_bounce_top2 },
     { INTERACT_MR_BLIZZARD,    interact_mr_blizzard },
     { INTERACT_HIT_FROM_BELOW, interact_hit_from_below },
     { INTERACT_BOUNCE_TOP,     interact_bounce_top },
@@ -1384,6 +1385,18 @@ u32 interact_bounce_top(struct MarioState *m, UNUSED u32 interactType, struct Ob
         sDelayInvincTimer = TRUE;
     }
 
+    return FALSE;
+}
+
+u32 interact_bounce_top2(struct MarioState *m, UNUSED u32 interactType, struct Object *obj) {
+    u32 interaction;
+    interaction = determine_interaction(m, obj);
+    if (interaction & INT_ATTACK_NOT_FROM_BELOW) {
+        if (interaction & INT_HIT_FROM_ABOVE) {
+            obj->oInteractStatus = INT_STATUS_INTERACTED;
+            bounce_off_object(m, obj, 60.0f);
+        }
+    }
     return FALSE;
 }
 
