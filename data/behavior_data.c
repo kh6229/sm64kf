@@ -6084,3 +6084,14 @@ const BehaviorScript bhvBlueMushroom[] = {
         CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };
+
+const BehaviorScript bhvKoopaNPC[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW)),
+    DROP_TO_FLOOR(),
+    LOAD_ANIMATIONS(oAnimations, koopa_seg6_anims_06011364),
+    SET_INTERACT_TYPE(INTERACT_TEXT),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_koopa_npc_loop),
+    END_LOOP(),
+};
