@@ -243,7 +243,7 @@ void bully_act_level_death(void) {
             }
 
             if (o->oBullySubtype == BULLY_STYPE_CHILL || o->oBehParams2ndByte == BULLY_BP_CHIEF_CHILLY) {
-                spawn_default_star(5739.0f, 1809.0f, -7274.0f);
+                spawn_default_star(5739.0f, 1109.0f, -7274.0f);
             } else {
                 spawn_default_star(0, 950.0f, -6800.0f);
                 spawn_object_abs_with_rot(o, 0, MODEL_NONE, bhvLllTumblingBridge,
@@ -404,6 +404,15 @@ void bhv_big_bully_with_minions_loop(void) {
 // Chief Chilly boss code begins here.
 // Borrows a lot of bully code, hence why it's here.
 
+void chief_chilly_check_for_wall(void) {
+    struct Object *nearestIceWall = cur_obj_nearest_object_with_behavior(bhvIceWall);
+    if (nearestIceWall != NULL) {
+        if (lateral_dist_between_objects(o, nearestIceWall) < 300.0f && nearestIceWall->oIceWallState != ICE_WALL_BROKEN && nearestIceWall->oAction == ICE_WALL_ACTIVE) {
+            o->oAction = BULLY_ACT_KNOCKBACK;
+        }
+    }
+}
+
 s32 chief_chilly_jump(void) {
     o->header.gfx.animInfo.animFrame = 0;
     if (cur_obj_lateral_dist_to_home() > 1000.f) {
@@ -510,18 +519,21 @@ void bhv_chief_chilly_loop(void) {
             break;
 
         case BULLY_ACT_CHASE_MARIO:
+            chief_chilly_check_for_wall();
             bully_check_mario_collision();
             bully_act_chase_mario();
             bully_step();
             break;
 
         case BULLY_ACT_KNOCKBACK:
+            chief_chilly_check_for_wall();
             bully_check_mario_collision();
             bully_act_knockback();
             bully_step();
             break;
 
         case BULLY_ACT_BACK_UP:
+            chief_chilly_check_for_wall();
             bully_check_mario_collision();
             bully_act_back_up();
             bully_step();
@@ -544,6 +556,5 @@ void bhv_chief_chilly_loop(void) {
             chief_chilly_return_home();
             break;
     }
-
     set_object_visibility(o, 3000);
 }
