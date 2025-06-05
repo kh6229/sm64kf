@@ -9,3 +9,5 @@
 
 #include "chillychief/geo.inc.c"
 #include "moneybag/geo.inc.c"
+
+#include "ice_wall/geo.inc.c"

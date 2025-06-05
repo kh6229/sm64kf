@@ -6107,3 +6107,12 @@ const BehaviorScript bhvChiefChilly[] = {
         CALL_NATIVE(bhv_chief_chilly_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvIceWall[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(ice_wall_collision),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_ice_wall_loop),
+    END_LOOP(),
+};

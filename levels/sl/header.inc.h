@@ -15,7 +15,7 @@ extern u8 sl_dl_ice_light_pal_rgba16[];
 extern Vtx sl_dl_Level_Mesh_mesh_layer_1_vtx_cull[8];
 extern Vtx sl_dl_Level_Mesh_mesh_layer_1_vtx_0[10];
 extern Gfx sl_dl_Level_Mesh_mesh_layer_1_tri_0[];
-extern Vtx sl_dl_Level_Mesh_mesh_layer_1_vtx_1[565];
+extern Vtx sl_dl_Level_Mesh_mesh_layer_1_vtx_1[589];
 extern Gfx sl_dl_Level_Mesh_mesh_layer_1_tri_1[];
 extern Vtx sl_dl_Level_Mesh_mesh_layer_1_vtx_2[366];
 extern Gfx sl_dl_Level_Mesh_mesh_layer_1_tri_2[];

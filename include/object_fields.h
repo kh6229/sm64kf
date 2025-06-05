@@ -1265,6 +1265,9 @@
 #define oChiefChillyDialogState OBJECT_FIELD_S32(0x21)
 #define oChiefChillySoundPlayed OBJECT_FIELD_S32(0x22)
 
+/* Ice Wall */
+#define oIceWallType OBJECT_FIELD_S32(0x1B)
+
 
 /*Custom general defines:
 
