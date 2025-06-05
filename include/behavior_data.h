@@ -542,5 +542,6 @@ extern const BehaviorScript bhvIntroScene[];
 extern const BehaviorScript bhvUnusedFakeStar[];
 extern const BehaviorScript bhvBlueMushroom[];
 extern const BehaviorScript bhvKoopaNPC[];
+extern const BehaviorScript bhvChiefChilly[];
 
 #endif // BEHAVIOR_DATA_H

@@ -6095,3 +6095,15 @@ const BehaviorScript bhvKoopaNPC[] = {
         CALL_NATIVE(bhv_koopa_npc_loop),
     END_LOOP(),
 };
+
+const BehaviorScript bhvChiefChilly[] = {
+    BEGIN(OBJ_LIST_GENACTOR),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_COMPUTE_DIST_TO_MARIO)),
+    LOAD_ANIMATIONS(oAnimations, chilly_chief_seg6_anims_06003994),
+    DROP_TO_FLOOR(),
+    SET_HOME(),
+    BEGIN_LOOP(),
+        SET_INT(oIntangibleTimer, 0),
+        CALL_NATIVE(bhv_chief_chilly_loop),
+    END_LOOP(),
+};

@@ -24,6 +24,18 @@ static struct ObjectHitbox sBigBullyHitbox = {
     /* hurtboxHeight:     */ 225,
 };
 
+static struct ObjectHitbox sChiefChillyHitbox = {
+    /* interactType:      */ INTERACT_BULLY,
+    /* downOffset:        */ 0,
+    /* damageOrCoinValue: */ 1,
+    /* health:            */ 3,
+    /* numLootCoins:      */ 0,
+    /* radius:            */ 115,
+    /* height:            */ 235,
+    /* hurtboxRadius:     */ 105,
+    /* hurtboxHeight:     */ 225,
+};
+
 void bhv_small_bully_init(void) {
     cur_obj_init_animation(0);
     vec3f_copy(&o->oHomeVec, &o->oPosVec);
@@ -82,7 +94,7 @@ void bully_act_chase_mario(void) {
         }
     }
 
-    if (!is_point_within_radius_of_mario(homeX, posY, homeZ, 1000)) {
+    if (o->oBehParams2ndByte != BULLY_BP_CHIEF_CHILLY && !is_point_within_radius_of_mario(homeX, posY, homeZ, 1000)) {
         o->oAction = BULLY_ACT_PATROL;
         cur_obj_init_animation(0);
     }
@@ -121,10 +133,14 @@ void bully_act_back_up(void) {
     //  conditions are activated. However because its angle is set to its facing angle,
     //  it will walk forward instead of backing up.
 
-    if (o->oTimer == 15) {
+    if (o->oTimer >= 15) {
         o->oMoveAngleYaw = o->oFaceAngleYaw;
         o->oFlags |= OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
-        o->oAction = BULLY_ACT_PATROL;
+        if (o->oBehParams2ndByte == BULLY_BP_CHIEF_CHILLY) {
+            o->oAction = BULLY_ACT_CHASE_MARIO;
+        } else {
+            o->oAction = BULLY_ACT_PATROL;
+        }
     }
 }
 
@@ -139,25 +155,48 @@ void bully_backup_check(s16 collisionFlags) {
 void bully_play_stomping_sound(void) {
     s16 animFrame = o->header.gfx.animInfo.animFrame;
 
-    switch (o->oAction) {
-        case BULLY_ACT_PATROL:
-            if (animFrame == 0 || animFrame == 12) {
-                if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
-                    cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_SMALL);
-                } else {
-                    cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_LARGE);
-                }
+    switch (o->oBehParams2ndByte) {
+        case BULLY_BP_CHIEF_CHILLY:
+            switch (o->oAction) {
+                case CHIEF_CHILLY_IDLE:
+                case CHIEF_CHILLY_DIALOG:
+                    if (animFrame == 0 || animFrame == 12) {
+                        cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_LARGE);
+                    }
+                    break;
+                
+                case BULLY_ACT_CHASE_MARIO:
+                case BULLY_ACT_BACK_UP:
+                    if (animFrame == 0 || animFrame == 5) {
+                        cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_LARGE);
+                    }
+                    break;
+                    
             }
             break;
+        
+        default:
+            switch (o->oAction) {
+                case BULLY_ACT_PATROL:
+                    if (animFrame == 0 || animFrame == 12) {
+                        if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
+                            cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_SMALL);
+                        } else {
+                            cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_LARGE);
+                        }
+                    }
+                    break;
 
-        case BULLY_ACT_CHASE_MARIO:
-        case BULLY_ACT_BACK_UP:
-            if (animFrame == 0 || animFrame == 5) {
-                if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
-                    cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_SMALL);
-                } else {
-                    cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_LARGE);
-                }
+                case BULLY_ACT_CHASE_MARIO:
+                case BULLY_ACT_BACK_UP:
+                    if (animFrame == 0 || animFrame == 5) {
+                        if (o->oBehParams2ndByte == BULLY_BP_SIZE_SMALL) {
+                            cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_SMALL);
+                        } else {
+                            cur_obj_play_sound_2(SOUND_OBJ_BULLY_WALK_LARGE);
+                        }
+                    }
+                    break;
             }
             break;
     }
@@ -170,11 +209,11 @@ void bully_step(void) {
     bully_play_stomping_sound();
     obj_check_floor_death(collisionFlags, sObjFloor);
 
-    if (o->oBullySubtype & BULLY_STYPE_CHILL) {
-        if (o->oPosY < 1030.0f) {
-            o->oAction = OBJ_ACT_LAVA_DEATH;
-        }
-    }
+    // if (o->oBullySubtype & BULLY_STYPE_CHILL) {
+    //     if (o->oPosY < 1030.0f) {
+    //         o->oAction = OBJ_ACT_LAVA_DEATH;
+    //     }
+    // }
 }
 
 void bully_spawn_coin(void) {
@@ -198,8 +237,13 @@ void bully_act_level_death(void) {
         } else {
             spawn_mist_particles();
 
-            if (o->oBullySubtype == BULLY_STYPE_CHILL) {
-                spawn_default_star(5739.0f, 2809.0f, -7274.0f);
+            if (o->oBehParams2ndByte == BULLY_BP_CHIEF_CHILLY) {
+                // SEQ_EVENT_BOSS won't work for some reason
+                stop_background_music(SEQUENCE_ARGS(4, 0x16));
+            }
+
+            if (o->oBullySubtype == BULLY_STYPE_CHILL || o->oBehParams2ndByte == BULLY_BP_CHIEF_CHILLY) {
+                spawn_default_star(5739.0f, 1809.0f, -7274.0f);
             } else {
                 spawn_default_star(0, 950.0f, -6800.0f);
                 spawn_object_abs_with_rot(o, 0, MODEL_NONE, bhvLllTumblingBridge,
@@ -220,6 +264,7 @@ void bhv_bully_loop(void) {
 
     switch (o->oAction) {
         case BULLY_ACT_PATROL:
+
             o->oForwardVel = 5.0f;
 
             if (obj_return_home_if_safe(o, o->oHomeX, o->oPosY, o->oHomeZ, 800) == TRUE) {
@@ -354,4 +399,151 @@ void bhv_big_bully_with_minions_loop(void) {
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
             break;
     }
+}
+
+// Chief Chilly boss code begins here.
+// Borrows a lot of bully code, hence why it's here.
+
+s32 chief_chilly_jump(void) {
+    o->header.gfx.animInfo.animFrame = 0;
+    if (cur_obj_lateral_dist_to_home() > 1000.f) {
+        o->oVelY = 80.0f;
+        o->oForwardVel = 40.0f;
+        o->oMoveAngleYaw = cur_obj_angle_to_home();
+    } else {
+        o->oVelY = 0.0f;
+    }
+    object_step();
+    
+    if (cur_obj_lateral_dist_to_home() < 1000.f) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void chief_chilly_return_home(void) {
+    o->oFlags |= OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
+    if (chief_chilly_jump()) {
+        if (o->oPosY > o->oHomeY) {
+            o->oForwardVel = approach_f32_symmetric(o->oForwardVel, 0.0f, 5.0f);
+            o->oVelY = -40.0f;
+            object_step();
+        } else {
+            if (o->oHealth == 1) {
+                cur_obj_init_animation(0);
+                o->oAction = CHIEF_CHILLY_IDLE;
+            } else {
+                cur_obj_init_animation(1);
+                o->oAction = BULLY_ACT_CHASE_MARIO;
+            }
+        }
+    }
+}
+
+void chief_chilly_dialog(void) {
+    o->oFlags |= OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
+    if (cur_obj_update_dialog_with_cutscene(MARIO_DIALOG_LOOK_UP, DIALOG_FLAG_TURN_TO_MARIO, CUTSCENE_DIALOG, (DIALOG_003 + o->oChiefChillyDialogState))) {
+        cur_obj_init_animation(1);
+        o->oAction = BULLY_ACT_CHASE_MARIO;
+    }
+}
+
+void chief_chilly_idle(void) {
+    o->oForwardVel = 0;
+    if (cur_obj_can_mario_activate_textbox_2(500.0f, 100.0f)) {
+        seq_player_lower_volume(SEQ_PLAYER_LEVEL, 60, 40);
+        o->oAction = CHIEF_CHILLY_DIALOG;
+    }
+}
+
+void chief_chilly_update_health(void) {
+    if (o->oChiefChillySoundPlayed < 4 && o->oHealth != 0) {
+        if (o->oTimer % 8 == 0) {
+            cur_obj_play_sound_2(SOUND_OBJ_BULLY_EXPLODE_LAVA);
+            o->oChiefChillySoundPlayed++;
+        }
+    } else {
+        o->oChiefChillySoundPlayed = 0;
+        switch (o->oHealth) {
+            case 2:
+                o->oHealth--;
+                o->oChiefChillyDialogState = 1;
+                o->oAction = CHIEF_CHILLY_RETURN_HOME;
+                break;
+            case 0:
+                bully_act_level_death();
+                break;
+            default:
+                o->oHealth--;
+                o->oAction = CHIEF_CHILLY_RETURN_HOME;
+        }
+    }
+}
+
+void bhv_chief_chilly_loop(void) {
+    vec3f_copy(&o->oBullyPrevVec, &o->oPosVec);
+
+    switch (o->oAction) {
+        case CHIEF_CHILLY_INIT:
+            cur_obj_init_animation(0);
+            vec3f_copy(&o->oHomeVec, &o->oPosVec);
+            o->oBehParams2ndByte = BULLY_BP_CHIEF_CHILLY;
+            o->oGravity = 5.0f;
+            o->oFriction = 0.93f;
+            o->oBuoyancy = 1.3f;
+            obj_set_hitbox(o, &sChiefChillyHitbox);
+            o->oHealth = 2;
+            o->oChiefChillyDialogState = 0;
+            o->oChiefChillySoundPlayed = 0;
+            o->oAction = CHIEF_CHILLY_IDLE;
+            break;
+
+        case CHIEF_CHILLY_IDLE:
+            chief_chilly_idle();
+            bully_play_stomping_sound();
+            break;
+
+        case CHIEF_CHILLY_DIALOG:
+            chief_chilly_dialog();
+            bully_play_stomping_sound();
+            break;
+
+        case BULLY_ACT_CHASE_MARIO:
+            bully_check_mario_collision();
+            bully_act_chase_mario();
+            bully_step();
+            break;
+
+        case BULLY_ACT_KNOCKBACK:
+            bully_check_mario_collision();
+            bully_act_knockback();
+            bully_step();
+            break;
+
+        case BULLY_ACT_BACK_UP:
+            bully_check_mario_collision();
+            bully_act_back_up();
+            bully_step();
+            break;
+
+        case OBJ_ACT_LAVA_DEATH:
+            bully_check_mario_collision();
+            chief_chilly_update_health();
+            break;
+
+        case OBJ_ACT_DEATH_PLANE_DEATH:
+            o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+            break;
+
+        case CHIEF_CHILLY_UPDATE_HEALTH:
+            chief_chilly_update_health();
+            break;
+        
+        case CHIEF_CHILLY_RETURN_HOME:
+            chief_chilly_return_home();
+            break;
+    }
+
+    set_object_visibility(o, 3000);
 }

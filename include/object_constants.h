@@ -935,6 +935,7 @@ enum oActionsStarDoor {
     /* oBehParams2ndByte */
     #define BULLY_BP_SIZE_SMALL                             0x0
     #define BULLY_BP_SIZE_BIG                               0x1
+    #define BULLY_BP_CHIEF_CHILLY                           0x2
     /* oAction */
     #define BULLY_ACT_PATROL                                0x0
     #define BULLY_ACT_CHASE_MARIO                           0x1
@@ -951,6 +952,14 @@ enum oActionsStarDoor {
     #define BULLY_ANIM_RUNNING                              0x1
     #define BULLY_ANIM_UNUSED                               0x2
     #define BULLY_ANIM_BOAST                                0x3
+
+/* Chief Chilly */
+    /* oAction */
+    #define CHIEF_CHILLY_INIT                               0x0
+    #define CHIEF_CHILLY_IDLE                               0x7
+    #define CHIEF_CHILLY_DIALOG                             0x8
+    #define CHIEF_CHILLY_UPDATE_HEALTH                        0x9
+    #define CHIEF_CHILLY_RETURN_HOME                        0xA
 
 /* Water Ring (all variants) */
     /* oAction */

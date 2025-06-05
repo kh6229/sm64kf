@@ -27,7 +27,7 @@ I'm uh... I'm too scared\n\
 to go down there.\n\
 Too steep."))
 
-DEFINE_DIALOG(DIALOG_001, 1, 5, 30, 200, _("\
+DEFINE_DIALOG(DIALOG_001, 1, 4, 30, 200, _("\
 Thank you Mario! These\n\
 will work great. A promise\n\
 is a promise, here's your\n\
@@ -39,32 +39,24 @@ bit more than that...\n\
 Like maybe five total?\n\
 Yeah, five should be good."))
 
-DEFINE_DIALOG(DIALOG_003, 1, 5, 95, 200, _("\
-Thank you, Mario! The Big\n\
-Bob-omb is nothing but a\n\
-big dud now! But the\n\
-battle for the castle has\n\
-just begun.\n\
-Other enemies are holding\n\
-the other Power Stars. If\n\
-you recover more Stars,\n\
-you can open new doors\n\
-that lead to new worlds!\n\
-My Bob-omb Buddies are\n\
-waiting for you. Be sure\n\
-to talk to them--they'll\n\
-set up cannons for you."))
+DEFINE_DIALOG(DIALOG_003, 1, 6, 30, 200, _("\
+Mario! I've been expecting\n\
+you! Congratulations for\n\
+getting this far, but\n\
+unfortunately your journey\n\
+will end here. Me and my\n\
+minions are here for good.\n\
+Hah! You'll never get me\n\
+off this mountaintop! Go\n\
+ahead and try!"))
 
-DEFINE_DIALOG(DIALOG_004, 1, 3, 95, 200, _("\
-We're peace-loving\n\
-Bob-ombs, so we don't use\n\
-cannons.\n\
-But if you'd like\n\
-to blast off, we don't\n\
-mind. Help yourself.\n\
-We'll prepare all of the\n\
-cannons in this course for\n\
-you to use. Bon Voyage!"))
+DEFINE_DIALOG(DIALOG_004, 1, 6, 30, 200, _("\
+Hah! You think you can just\n\
+push me into the frozen\n\
+water and expect me to die\n\
+just like any other bully?\n\
+You'll have to try harder\n\
+than that!"))
 
 DEFINE_DIALOG(DIALOG_005, 1, 3, 30, 200, _("\
 Hey, Mario! Is it true\n\

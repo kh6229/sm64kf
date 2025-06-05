@@ -1261,6 +1261,10 @@
 /* Blue Coin Switch */
 #define oBlueCoinSwitchTimer OBJECT_FIELD_S32(0x1B)
 
+/* Chief Chilly */
+#define oChiefChillyDialogState OBJECT_FIELD_S32(0x21)
+#define oChiefChillySoundPlayed OBJECT_FIELD_S32(0x22)
+
 
 /*Custom general defines:
 
