@@ -39,4 +39,8 @@ extern const struct Animation *const moneybag_seg6_anims_06005E5C[];
 
 #include "ice_wall/geo_header.h"
 
+#include "snow_mountain/collision_header.h"
+
+#include "snow_mountain/geo_header.h"
+
 #endif

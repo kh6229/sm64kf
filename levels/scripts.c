@@ -340,6 +340,7 @@ const LevelScript script_func_global_16[] = {
 };
 
 const LevelScript script_func_global_17[] = {
+    LOAD_MODEL_FROM_GEO(MODEL_SNOW_MOUNTAIN, snow_mountain_geo),
     LOAD_MODEL_FROM_GEO(MODEL_ICE_WALL, ice_wall_geo),
     LOAD_MODEL_FROM_GEO(MODEL_CHILL_BULLY,             chilly_chief_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BIG_CHILL_BULLY,         chilly_chief_big_geo),

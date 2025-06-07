@@ -11,3 +11,4 @@
 #include "moneybag/geo.inc.c"
 
 #include "ice_wall/geo.inc.c"
+#include "snow_mountain/geo.inc.c"

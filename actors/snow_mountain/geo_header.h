@@ -1,0 +1,16 @@
+extern const GeoLayout snow_mountain_geo[];
+extern u8 snow_mountain_rock_ci8[];
+extern u8 snow_mountain_rock_x_snow_edge_rock_pal_rgba16[];
+extern u8 snow_mountain_snow_edge_rock_ci8[];
+extern u8 snow_mountain_snow_ci8[];
+extern u8 snow_mountain_snow_pal_rgba16[];
+extern Vtx snow_mountain_snow_mountain_mesh_layer_1_vtx_cull[8];
+extern Vtx snow_mountain_snow_mountain_mesh_layer_1_vtx_0[76];
+extern Gfx snow_mountain_snow_mountain_mesh_layer_1_tri_0[];
+extern Vtx snow_mountain_snow_mountain_mesh_layer_1_vtx_1[49];
+extern Gfx snow_mountain_snow_mountain_mesh_layer_1_tri_1[];
+extern Gfx mat_snow_mountain_f3dlite_material_003_layer1[];
+extern Gfx mat_revert_snow_mountain_f3dlite_material_003_layer1[];
+extern Gfx mat_snow_mountain_Snow_001[];
+extern Gfx mat_revert_snow_mountain_Snow_001[];
+extern Gfx snow_mountain_snow_mountain_mesh_layer_1[];

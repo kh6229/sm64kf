@@ -6110,9 +6110,21 @@ const BehaviorScript bhvChiefChilly[] = {
 
 const BehaviorScript bhvIceWall[] = {
     BEGIN(OBJ_LIST_SURFACE),
+    SET_HOME(),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
     LOAD_COLLISION_DATA(ice_wall_collision),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_ice_wall_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvSnowMountain[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    LOAD_COLLISION_DATA(snow_mountain_collision),
+    SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 20000),
+    BEGIN_LOOP(),
+        CALL_NATIVE(load_object_collision_model),
     END_LOOP(),
 };

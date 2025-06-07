@@ -222,8 +222,10 @@ void bully_spawn_coin(void) {
     cur_obj_play_sound_2(SOUND_GENERAL_COIN_SPURT);
 
     coin->oForwardVel = 10.0f;
-    coin->oVelY = 100.0f;
-    coin->oPosY = o->oPosY + 310.0f;
+    coin->oVelY = 50.0f;
+    coin->oPosX = gMarioObject->oPosX;
+    coin->oPosY = gMarioObject->oPosY;
+    coin->oPosZ = gMarioObject->oPosZ;
     coin->oMoveAngleYaw = (f32)(o->oBullyMarioCollisionAngle + 0x8000) + random_float() * 1024.0f;
 }
 
@@ -432,6 +434,7 @@ s32 chief_chilly_jump(void) {
 }
 
 void chief_chilly_return_home(void) {
+    o->oChiefChillyHitLava = FALSE;
     o->oFlags |= OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW;
     if (chief_chilly_jump()) {
         if (o->oPosY > o->oHomeY) {
@@ -467,6 +470,8 @@ void chief_chilly_idle(void) {
 }
 
 void chief_chilly_update_health(void) {
+    o->oChiefChillyHitLava = TRUE;
+
     if (o->oChiefChillySoundPlayed < 4 && o->oHealth != 0) {
         if (o->oTimer % 8 == 0) {
             cur_obj_play_sound_2(SOUND_OBJ_BULLY_EXPLODE_LAVA);
@@ -486,6 +491,7 @@ void chief_chilly_update_health(void) {
             default:
                 o->oHealth--;
                 o->oAction = CHIEF_CHILLY_RETURN_HOME;
+                break;
         }
     }
 }
@@ -505,6 +511,7 @@ void bhv_chief_chilly_loop(void) {
             o->oHealth = 2;
             o->oChiefChillyDialogState = 0;
             o->oChiefChillySoundPlayed = 0;
+            o->oChiefChillyHitLava = FALSE;
             o->oAction = CHIEF_CHILLY_IDLE;
             break;
 

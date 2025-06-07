@@ -2686,6 +2686,9 @@ enum animIDsFirePiranhaPlant {
     #define ICE_WALL_INACTIVE                               0x1
     #define ICE_WALL_ACTIVE                                 0x2
     #define ICE_WALL_BREAK                                  0x3
+    #define ICE_WALL_RISE                                   0x4
+    #define ICE_WALL_PHASE_1                                0x5
+    #define ICE_WALL_PHASE_2                                0x6
     /* oIceWallState */
     #define ICE_WALL_UNBROKEN                               0x0
     #define ICE_WALL_BROKEN                                 0x1

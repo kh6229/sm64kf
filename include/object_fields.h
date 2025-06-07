@@ -1264,11 +1264,12 @@
 /* Chief Chilly */
 #define oChiefChillyDialogState OBJECT_FIELD_S32(0x21)
 #define oChiefChillySoundPlayed OBJECT_FIELD_S32(0x22)
+#define oChiefChillyHitLava     OBJECT_FIELD_S32(0x48)
 
 /* Ice Wall */
 #define oIceWallType         OBJECT_FIELD_S32(0x1B)
 #define oIceWallState        OBJECT_FIELD_S32(0x1C)
-#define oIceWallParentHealth OBJECT_FIELD_S32(0x1D)
+#define oIceWallTimer    OBJECT_FIELD_S32(0x1D)
 
 
 /*Custom general defines:

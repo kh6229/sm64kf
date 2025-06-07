@@ -46,17 +46,19 @@ getting this far, but\n\
 unfortunately your journey\n\
 will end here. Me and my\n\
 minions are here for good.\n\
-Hah! You'll never get me\n\
-off this mountaintop! Go\n\
+With this star I was\n\
+able to freeze over this\n\
+lake! Hah! You think you\n\
+can take my star? Go\n\
 ahead and try!"))
 
 DEFINE_DIALOG(DIALOG_004, 1, 6, 30, 200, _("\
 Hah! You think you can just\n\
 push me into the frozen\n\
-water and expect me to die\n\
-just like any other bully?\n\
-You'll have to try harder\n\
-than that!"))
+water and expect me to\n\
+die like any other\n\
+bully? You'll have to\n\
+try harder than that!"))
 
 DEFINE_DIALOG(DIALOG_005, 1, 3, 30, 200, _("\
 Hey, Mario! Is it true\n\

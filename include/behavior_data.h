@@ -544,5 +544,6 @@ extern const BehaviorScript bhvBlueMushroom[];
 extern const BehaviorScript bhvKoopaNPC[];
 extern const BehaviorScript bhvChiefChilly[];
 extern const BehaviorScript bhvIceWall[];
+extern const BehaviorScript bhvSnowMountain[];
 
 #endif // BEHAVIOR_DATA_H
