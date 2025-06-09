@@ -47,6 +47,7 @@ enum SeqId {
     SEQ_EVENT_CUTSCENE_LAKITU,        // 0x22 (not in JP)
     SEQ_MUSHROOM_VALLEY,              // 0x23
     SEQ_CHILL_LAKE,                   // 0x24
+    SEQ_WING_CAP,                     // 0x25
     SEQ_COUNT
 };
 
