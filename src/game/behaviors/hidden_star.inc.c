@@ -33,6 +33,7 @@ void bhv_hidden_star_trigger_loop(void) {
     if (obj_check_if_collided_with_object(o, gMarioObject)) {
         struct Object *hiddenStar = cur_obj_nearest_object_with_behavior(bhvHiddenStar);
         spawn_object(o, MODEL_SPARKLES, bhvCoinSparklesSpawner);
+        o->oHiddenStarTriggerCanSpin = TRUE;
 
         if (hiddenStar != NULL) {
             hiddenStar->oHiddenStarTriggerCounter++;
@@ -42,9 +43,23 @@ void bhv_hidden_star_trigger_loop(void) {
             }
 
             play_sound(SOUND_MENU_COLLECT_SECRET + (((u8) hiddenStar->oHiddenStarTriggerCounter - 1) << 16), gGlobalSoundSource);
+
         }
 
-        o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+        if(o->oBehParams2ndByte != 1) {
+            o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
+        } else {
+            cur_obj_become_intangible();
+        }
+    }
+
+    if (o->oBehParams2ndByte == 1 && o->oHiddenStarTriggerCanSpin == TRUE) {
+        if (o->oHiddenStarTriggerSpinTimer > 0) {
+            o->oMoveAnglePitch += o->oHiddenStarTriggerSpinTimer;
+            o->oHiddenStarTriggerSpinTimer -= 0x50;
+        } else {
+            o->oHiddenStarTriggerCanSpin = FALSE;
+        }
     }
 }
 

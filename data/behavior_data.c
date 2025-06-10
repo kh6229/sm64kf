@@ -4598,9 +4598,12 @@ const BehaviorScript bhvHiddenStar[] = {
 
 const BehaviorScript bhvHiddenStarTrigger[] = {
     BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
+    OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE)),
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
     SET_INT(oIntangibleTimer, 0),
+    SET_FLOAT(oDrawingDistance, 20000),
+    SET_INT(oHiddenStarTriggerSpinTimer, 0x1000),
+    SET_INT(oHiddenStarTriggerCanSpin, FALSE),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_hidden_star_trigger_loop),
     END_LOOP(),

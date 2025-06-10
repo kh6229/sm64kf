@@ -4,6 +4,7 @@
 #define MODEL_NONE                             0x00
 
 /* fast64 object exports get inserted here */
+#define MODEL_SECRET_RING                 87
 #define MODEL_SNOW_MOUNTAIN               104
 #define MODEL_ICE_WALL                    103
 #define MODEL_BLUE_MUSHROOM               89

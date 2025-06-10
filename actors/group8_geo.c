@@ -9,3 +9,5 @@
 
 #include "springboard/geo.inc.c"
 #include "capswitch/geo.inc.c"
+
+#include "secret_ring/geo.inc.c"

@@ -12,3 +12,5 @@ UNUSED static const u64 binid_0 = 0;
 #include "capswitch/model.inc.c"
 #include "capswitch/collision.inc.c"
 UNUSED static const u64 binid_1 = 1;
+
+#include "secret_ring/model.inc.c"
