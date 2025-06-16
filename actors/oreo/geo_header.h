@@ -1,0 +1,17 @@
+extern const GeoLayout oreo_geo[];
+extern u8 oreo_oreo_i8[];
+extern u8 oreo_oreo_side_i8[];
+extern Vtx oreo_oreo_mesh_layer_1_vtx_cull[8];
+extern Vtx oreo_oreo_mesh_layer_1_vtx_0[16];
+extern Gfx oreo_oreo_mesh_layer_1_tri_0[];
+extern Vtx oreo_oreo_mesh_layer_1_vtx_1[38];
+extern Gfx oreo_oreo_mesh_layer_1_tri_1[];
+extern Vtx oreo_oreo_mesh_layer_1_vtx_2[26];
+extern Gfx oreo_oreo_mesh_layer_1_tri_2[];
+extern Gfx mat_oreo_Oreo[];
+extern Gfx mat_revert_oreo_Oreo[];
+extern Gfx mat_oreo_Oreo_Side[];
+extern Gfx mat_revert_oreo_Oreo_Side[];
+extern Gfx mat_oreo_Creme[];
+extern Gfx mat_revert_oreo_Creme[];
+extern Gfx oreo_oreo_mesh_layer_1[];

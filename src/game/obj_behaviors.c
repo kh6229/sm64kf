@@ -777,3 +777,4 @@ UNUSED s32 debug_sequence_tracker(s16 debugInputSequence[]) {
 #include "behaviors/blue_mushroom.inc.c"
 #include "behaviors/koopanpc.inc.c"
 #include "behaviors/ice_wall.inc.c"
+#include "behaviors/oreo.inc.c"

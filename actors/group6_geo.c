@@ -10,3 +10,6 @@
 #include "monty_mole/geo.inc.c"
 #include "ukiki/geo.inc.c"
 #include "fwoosh/geo.inc.c"
+
+#include "oreo/geo.inc.c"
+#include "gummy_goomba/geo.inc.c"

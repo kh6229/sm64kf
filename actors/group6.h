@@ -84,4 +84,10 @@ extern const Gfx ukiki_seg5_dl_0500D078[];
 extern const Gfx ukiki_seg5_dl_0500D108[];
 extern const struct Animation *const ukiki_seg5_anims_05015784[];
 
+#include "oreo/collision_header.h"
+
+#include "oreo/geo_header.h"
+
+#include "gummy_goomba/geo_header.h"
+
 #endif
